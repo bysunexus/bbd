@@ -1,42 +1,28 @@
 package in.fireye.bbd.controller;
 
-import in.fireye.bbd.tools.DateTimeTools;
-import jakarta.annotation.Resource;
+import in.fireye.bbd.service.DemoService;
+import in.fireye.bbd.vo.MessageVO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/demo")
+@RequiredArgsConstructor
 @Slf4j
 public class DemoController {
 
 
-  @Resource
-  private OllamaChatModel model;
+  private final DemoService demoService;
 
-  @Resource
-  private DateTimeTools dateTimeTools;
+  // 如使用Server-Sent Events 需要将 produces = MediaType.TEXT_EVENT_STREAM_VALUE，此处仅以流方式返回
+  @PostMapping(value = "/chat")
+  public Flux<String> time(@RequestBody MessageVO message) {
 
-
-  @PostMapping("/chat")
-  public Flux<String> chat(@RequestParam("message") String message) {
-    return model.stream(message);
-  }
-
-  @PostMapping("/time")
-  public String time(@RequestParam("message") String message) {
-    String result = ChatClient.create(model)
-      .prompt(message)
-      .tools(dateTimeTools)
-      .call()
-      .content();
-
-    return result;
+    return demoService.chat(message.getMessage());
   }
 }
