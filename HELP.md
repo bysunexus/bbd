@@ -17,3 +17,5 @@
 
 1. 将spring ai 升级为 1.0.0-M7
 2. 使用openai sdk进行集成（openai sdk比较通用各大平台基本都支持）
+3. mcp client集成测试 （需要安装npx，根据安装目录修改[mcp-servers-config.json](src/main/resources/mcp-servers-config.json)
+   文件）
