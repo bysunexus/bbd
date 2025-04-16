@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DateTimeTools {
-  @Tool(description = "获取今天当前具体的日期和时间")
+  @Tool(description = "获取当前具体的日期和时间")
   public String getCurrentDateTime() {
     return DateTime.now().toString("yyyy-MM-dd HH:mm:ss EEE");
   }

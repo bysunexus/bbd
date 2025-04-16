@@ -12,3 +12,8 @@
 1. jdk 21
 2. ollama
 3. qwen2.5:7b 或其他支持tool的模型
+
+### 2025年4月16日
+
+1. 将spring ai 升级为 1.0.0-M7
+2. 使用openai sdk进行集成（openai sdk比较通用各大平台基本都支持）
