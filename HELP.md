@@ -10,8 +10,9 @@
 ### 依赖环境
 
 1. jdk 21
-2. ollama
-3. qwen2.5:7b 或其他支持tool的模型
+2. ~~ollama~~
+3. ~~qwen2.5:7b 或其他支持tool的模型~~
+4. 根据使用的平台配置api地址和key
 
 ### 2025年4月16日
 
@@ -25,11 +26,6 @@
 1. 由于系统负载问题导致计算机蓝屏，本地的Ollama调用改为使用[火山引擎](https://www.volcengine.com/)的免费额度进行测试（需要设置环境变量DOUBAO_API_KEY值为火山引擎的api key）
 2. 修改ChatClient的配置，统一构建chatClient，避免每次创建chatClient时都需要设置系统提示语和工具
 3. 调整项目目录结构，分模块 1. bbd-demo-chat 2. bbd-demo-mcp-server
-
-
-
-
-
 
 
 ### roadmap
