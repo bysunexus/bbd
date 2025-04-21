@@ -5,7 +5,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "C:/Users/username/Desktop"
+        "E:/workspace/java/bbd/"
       ]
     }
   }

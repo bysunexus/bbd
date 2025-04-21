@@ -13,7 +13,7 @@ public class DateTimeTools {
   }
 
   @Tool(description = "基于当前时间根据输入偏移量参数计算日期")
-  public String getDate(@ToolParam(description = "偏移量", required = true) int count) {
+  public String getDate(@ToolParam(description = "偏移量") int count) {
     return DateTime.now().plusDays(count).toString("yyyy-MM-dd");
   }
 }
