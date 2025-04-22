@@ -7,6 +7,11 @@
 3. 简单的聊天界面 http://localhost:8080/
 4. 也可使用命令行进行交互
 
+目前集成的真假工具如下：
+1. 查询日期（in.fireye.demo.chat.tools.DateTimeTools），应用内tools calling方式集成
+2. 文件管理（@modelcontextprotocol/server-filesystem），mcp stdio方式集成
+3. 虚假的天气查询（in.fireye.demo.mcp.server.WeatherService），mcp sse方式集成
+
 ### 依赖环境
 
 1. jdk 21
@@ -27,9 +32,11 @@
 2. 修改ChatClient的配置，统一构建chatClient，避免每次创建chatClient时都需要设置系统提示语和工具
 3. 调整项目目录结构，分模块 1. bbd-demo-chat 2. bbd-demo-mcp-server
 
+### 2025年4月22日
+1. 添加同步mcp server示例
 
 ### roadmap
 - [x] 项目模块拆分
-- [ ] mcp server 同步示例开发
+- [x] mcp server 同步示例开发
 - [ ] mcp server 异步示例开发
 - [ ] mcp server 鉴权
