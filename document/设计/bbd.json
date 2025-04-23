@@ -1,7 +1,4 @@
 {
-  "author": "Unnamed",
-  "title": "bbd",
-  "date": "2025-04-23T09:46:51.087Z",
   "tables": [
     {
       "id": 0,
@@ -462,5 +459,6 @@
   "relationships": [],
   "notes": [],
   "subjectAreas": [],
-  "database": "sqlite"
+  "database": "sqlite",
+  "title": "bbd"
 }
