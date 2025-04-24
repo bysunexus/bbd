@@ -1,0 +1,13 @@
+package in.fireye.bbd.server;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class BbdServerApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(BbdServerApplication.class, args);
+  }
+
+}
