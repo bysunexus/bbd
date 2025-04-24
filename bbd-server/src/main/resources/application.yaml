@@ -1,0 +1,44 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: bbd-server
+  threads:
+    virtual:
+      enabled: true
+  ai:
+    openai:
+      api-key: ${DOUBAO_API_KEY}
+      chat:
+        base-url: https://ark.cn-beijing.volces.com/api
+        completions-path: /v3/chat/completions
+        options:
+          model: doubao-1-5-thinking-pro-250415
+  datasource:
+    url: jdbc:sqlite::resource:bbd.sqlite?cache=shared
+    hikari:
+      connection-init-sql: |
+        PRAGMA journal_mode=WAL;
+        PRAGMA synchronous=NORMAL;
+        PRAGMA mmap_size=134217728;
+        PRAGMA journal_size_limit=134217728; 
+        PRAGMA cache_size=2000;
+        PRAGMA temp_store=MEMORY;
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+bbd:
+  security:
+    anonymous-paths:
+      - /assets/**
+      - /webjars/**
+      - /login
+      - /oauth2/**
+logging:
+  level:
+    root: info
+    org.springframework: debug
+    in.fireye: debug

@@ -12,7 +12,7 @@ target/
 .springBeans
 .sts4-cache
 .flattened-pom.xml
-
+**/.flattened-pom.xml
 ### IntelliJ IDEA ###
 .idea
 *.iws
