@@ -8,5 +8,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 )
 @Data
 public class SecurityProperties {
+  /**
+   * 匿名访问路径
+   */
   private String[] anonymousPaths;
 }
