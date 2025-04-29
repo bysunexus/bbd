@@ -1,14 +1,12 @@
 package in.fireye.bbd.server.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -16,6 +14,7 @@ import java.time.Instant;
 @Table(name = "bbd_users")
 public class BbdUser {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "user_id", nullable = false)
   private Integer id;
 
@@ -37,11 +36,13 @@ public class BbdUser {
   @Column(name = "modify_user", nullable = false)
   private Integer modifyUser;
 
-  @Column(name = "create_time", nullable = false)
-  private Instant createTime;
+  @CreationTimestamp
+  @Column(name = "create_time", columnDefinition = "TIMESTAMP", nullable = false)
+  private LocalDateTime createTime;
 
-  @Column(name = "modify_time", nullable = false)
-  private Instant modifyTime;
+  @CreationTimestamp
+  @Column(name = "modify_time", columnDefinition = "TIMESTAMP", nullable = false)
+  private LocalDateTime modifyTime;
 
   @ColumnDefault("'1'")
   @Column(name = "enabled", nullable = false, length = 1)

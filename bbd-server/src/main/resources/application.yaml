@@ -15,7 +15,7 @@ spring:
         options:
           model: doubao-1-5-thinking-pro-250415
   datasource:
-    url: jdbc:sqlite::resource:bbd.sqlite?cache=shared
+    url: jdbc:sqlite::resource:bbd.sqlite
     hikari:
       connection-init-sql: |
         PRAGMA journal_mode=WAL;

@@ -1,14 +1,12 @@
 package in.fireye.bbd.server.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -16,17 +14,12 @@ import java.time.Instant;
 @Table(name = "bbd_fee_type")
 public class BbdFeeType {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "fee_type_id", nullable = false)
   private Integer id;
 
-  @Column(name = "name_l1", nullable = false, length = 100)
-  private String nameL1;
-
-  @Column(name = "name_l2", nullable = false, length = 100)
-  private String nameL2;
-
-  @Column(name = "name_l3", nullable = false, length = 100)
-  private String nameL3;
+  @Column(name = "type_name", nullable = false, length = 100)
+  private String typeName;
 
   @Column(name = "create_user", nullable = false)
   private Integer createUser;
@@ -34,14 +27,19 @@ public class BbdFeeType {
   @Column(name = "modify_user", nullable = false)
   private Integer modifyUser;
 
-  @Column(name = "create_time", nullable = false)
-  private Instant createTime;
+  @CreationTimestamp
+  @Column(name = "create_time", columnDefinition = "TIMESTAMP", nullable = false)
+  private LocalDateTime createTime;
 
-  @Column(name = "modify_time", nullable = false)
-  private Instant modifyTime;
+  @CreationTimestamp
+  @Column(name = "modify_time", columnDefinition = "TIMESTAMP", nullable = false)
+  private LocalDateTime modifyTime;
 
   @ColumnDefault("'0'")
   @Column(name = "deleted", nullable = false, length = 1)
   private String deleted;
+
+  @Column(name = "parent_id", nullable = false)
+  private Integer parentId;
 
 }

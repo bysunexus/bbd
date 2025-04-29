@@ -3,14 +3,22 @@ create table bbd_fee_type
   fee_type_id INTEGER                not null
     constraint bbd_fee_type_pk
       primary key autoincrement,
-  name_l1     VARCHAR(100)           not null,
-  name_l2     VARCHAR(100)           not null,
-  name_l3     VARCHAR(100)           not null,
+  type_name   VARCHAR(100)           not null,
   create_user INTEGER                not null,
   modify_user INTEGER                not null,
   create_time TIMESTAMP              not null,
   modify_time TIMESTAMP              not null,
-  deleted     VARCHAR(1) default '0' not null
+  deleted     VARCHAR(1) default '0' not null,
+  parent_id   integer                not null
+);
+
+create table bbd_fee_type_tree
+(
+  ancestor_id   integer not null,
+  descendant_id integer not null,
+  distance      integer not null,
+  constraint bbd_fee_type_tree_pk
+    primary key (ancestor_id, descendant_id)
 );
 
 create table bbd_ledger
@@ -27,7 +35,8 @@ create table bbd_ledger
   modify_user INTEGER                not null,
   create_time TIMESTAMP              not null,
   modify_time TIMESTAMP              not null,
-  deleted     VARCHAR(1) default '0' not null
+  deleted     VARCHAR(1) default '0' not null,
+  desc        varchar(500)           not null
 );
 
 create table bbd_users
