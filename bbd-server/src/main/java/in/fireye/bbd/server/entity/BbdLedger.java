@@ -25,9 +25,6 @@ public class BbdLedger {
   @Column(name = "fee_type_id", nullable = false)
   private Integer feeTypeId;
 
-  @Column(name = "account_id")
-  private Integer accountId;
-
   @Column(name = "amount", nullable = false)
   private BigDecimal amount;
 

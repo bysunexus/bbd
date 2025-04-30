@@ -13,7 +13,7 @@ public interface IFeeTypeService {
    *
    * @param feeTypeDto 费用类型
    */
-  void createFeeType(BbdFeeTypeDto feeTypeDto);
+  BbdFeeTypeDto createFeeType(BbdFeeTypeDto feeTypeDto);
 
   /**
    * 更新费用类型

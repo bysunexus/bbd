@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class FeeTypeServiceImpl implements IFeeTypeService {
+public class FeeTypeService implements IFeeTypeService {
 
   private final BbdFeeTypeRepository feeTypeRepository;
   private final BbdFeeTypeTreeRepository feeTypeTreeRepository;
@@ -27,13 +27,14 @@ public class FeeTypeServiceImpl implements IFeeTypeService {
 
   @Override
   @Transactional(rollbackFor = Exception.class)
-  public void createFeeType(BbdFeeTypeDto feeTypeDto) {
+  public BbdFeeTypeDto createFeeType(BbdFeeTypeDto feeTypeDto) {
 
     BbdFeeType feeType = new BbdFeeType();
     feeType.setTypeName(feeTypeDto.getTypeName());
     // todo:sby 待登录完成后此处修改为获取当前登录用户id
     feeType.setCreateUser(0);
     feeType.setModifyUser(0);
+    feeType.setDeleted(Deleted.NO.getCode());
     feeType.setParentId(feeTypeDto.getParentId());
     feeTypeRepository.saveAndFlush(feeType);
 
@@ -49,6 +50,9 @@ public class FeeTypeServiceImpl implements IFeeTypeService {
 
     childrenTrees.add(new BbdFeeTypeTree(feeType.getId(), feeType.getId(), 0));
     feeTypeTreeRepository.saveAll(childrenTrees);
+
+    feeTypeDto.setId(feeType.getId());
+    return feeTypeDto;
   }
 
   @Override

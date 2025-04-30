@@ -20,7 +20,6 @@ public class BbdLedgerDto implements Serializable {
   private Integer id;
   private String inOutSign;
   private Integer feeTypeId;
-  private Integer accountId;
   private BigDecimal amount;
   private LocalDateTime feeDate;
   private String desc;
@@ -29,7 +28,6 @@ public class BbdLedgerDto implements Serializable {
     this.id = ledger.getId();
     this.inOutSign = ledger.getInOutSign();
     this.feeTypeId = ledger.getFeeTypeId();
-    this.accountId = ledger.getAccountId();
     this.amount = ledger.getAmount();
     this.feeDate = ledger.getFeeDate();
     this.desc = ledger.getDesc();

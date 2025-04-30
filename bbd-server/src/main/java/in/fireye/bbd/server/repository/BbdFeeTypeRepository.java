@@ -13,7 +13,7 @@ public interface BbdFeeTypeRepository extends JpaRepository<BbdFeeType, Integer>
   @Modifying
   @Query("""
       update BbdFeeType t set t.deleted = '1' ,t.modifyTime = :modifyTime, t.modifyUser = :modifyUser
-      where t.id in (select tt.descendantId from BbdFeeTypeTree tt where tt.ancestorId = :feeTypeId)
+      where t.id in (select tt.descendantId from BbdFeeTypeTree tt where tt.ancestorId = :feeTypeId) and t.deleted = '0'
     """)
   void deleteFeeType(Integer feeTypeId, LocalDateTime modifyTime, Integer modifyUser);
 
