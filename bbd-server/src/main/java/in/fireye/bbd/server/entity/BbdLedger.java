@@ -17,7 +17,7 @@ public class BbdLedger {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ledger_id", nullable = false)
-  private Integer id;
+  private Integer ledgerId;
 
   @Column(name = "in_out_sign", nullable = false, length = 1)
   private String inOutSign;

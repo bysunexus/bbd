@@ -15,12 +15,12 @@ import java.io.Serializable;
 public class BbdFeeTypeDto implements Serializable {
   @Serial
   private static final long serialVersionUID = 982568530253999217L;
-  private Integer id;
+  private Integer feeTypeId;
   private String typeName;
   private Integer parentId;
 
   public BbdFeeTypeDto(BbdFeeType feeType) {
-    this.id = feeType.getId();
+    this.feeTypeId = feeType.getFeeTypeId();
     this.typeName = feeType.getTypeName();
     this.parentId = feeType.getParentId();
   }

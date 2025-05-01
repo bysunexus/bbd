@@ -67,4 +67,6 @@ public interface IFeeTypeService {
    * @return 获取费用类型树
    */
   List<BbdFeeTypeDto> getFeeTypeTreeById(Integer feeTypeId);
+
+
 }

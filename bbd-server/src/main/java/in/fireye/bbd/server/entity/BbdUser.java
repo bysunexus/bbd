@@ -16,7 +16,7 @@ public class BbdUser {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "user_id", nullable = false)
-  private Integer id;
+  private Integer userId;
 
   @Column(name = "user_name", nullable = false, length = 50)
   private String userName;

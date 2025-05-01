@@ -33,7 +33,7 @@ public class LedgerService implements ILedgerService {
     ledger.setDeleted(Deleted.NO.getCode());
     ledger.setDesc(ledgerDto.getDesc());
     ledgerRepository.saveAndFlush(ledger);
-    ledgerDto.setId(ledger.getId());
+    ledgerDto.setLedgerId(ledger.getLedgerId());
     return ledgerDto;
   }
 
@@ -49,7 +49,7 @@ public class LedgerService implements ILedgerService {
 
   @Override
   public void updateLedger(BbdLedgerDto ledgerDto) {
-    Optional<BbdLedger> ledgerOptional = ledgerRepository.findByIdAndDeleted(ledgerDto.getId(), Deleted.NO.getCode());
+    Optional<BbdLedger> ledgerOptional = ledgerRepository.findByIdAndDeleted(ledgerDto.getLedgerId(), Deleted.NO.getCode());
     BbdLedger ledger = ledgerOptional.orElseThrow(() -> new BbdBusinessException(ResponseCode.PARAM_ERROR));
 
     ledger.setFeeTypeId(ledgerDto.getFeeTypeId());

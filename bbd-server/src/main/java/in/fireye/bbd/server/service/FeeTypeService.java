@@ -43,21 +43,21 @@ public class FeeTypeService implements IFeeTypeService {
     List<BbdFeeTypeTree> childrenTrees = parentTrees.stream().map(parentTree -> {
       BbdFeeTypeTree feeTypeTree = new BbdFeeTypeTree();
       feeTypeTree.setAncestorId(parentTree.getAncestorId());
-      feeTypeTree.setDescendantId(feeType.getId());
+      feeTypeTree.setDescendantId(feeType.getFeeTypeId());
       feeTypeTree.setDistance(parentTree.getDistance() + 1);
       return feeTypeTree;
     }).collect(Collectors.toList());
 
-    childrenTrees.add(new BbdFeeTypeTree(feeType.getId(), feeType.getId(), 0));
+    childrenTrees.add(new BbdFeeTypeTree(feeType.getFeeTypeId(), feeType.getFeeTypeId(), 0));
     feeTypeTreeRepository.saveAll(childrenTrees);
 
-    feeTypeDto.setId(feeType.getId());
+    feeTypeDto.setFeeTypeId(feeType.getFeeTypeId());
     return feeTypeDto;
   }
 
   @Override
   public void updateFeeType(BbdFeeTypeDto feeTypeDto) {
-    Optional<BbdFeeType> feeType = feeTypeRepository.findById(feeTypeDto.getId());
+    Optional<BbdFeeType> feeType = feeTypeRepository.findById(feeTypeDto.getFeeTypeId());
     BbdFeeType type = feeType.orElseThrow(() -> new BbdBusinessException(ResponseCode.PARAM_ERROR));
     type.setTypeName(feeTypeDto.getTypeName());
     type.setModifyTime(LocalDateTime.now());

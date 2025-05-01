@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface BbdLedgerRepository extends JpaRepository<BbdLedger, Integer> {
-  @Query("select l from BbdLedger l where l.id = :id and l.deleted = :code")
+  @Query("select l from BbdLedger l where l.ledgerId = :id and l.deleted = :code")
   Optional<BbdLedger> findByIdAndDeleted(Integer id, String code);
 }

@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class BbdLedgerDto implements Serializable {
   @Serial
   private static final long serialVersionUID = 850731854733029928L;
-  private Integer id;
+  private Integer ledgerId;
   private String inOutSign;
   private Integer feeTypeId;
   private BigDecimal amount;
@@ -25,7 +25,7 @@ public class BbdLedgerDto implements Serializable {
   private String desc;
 
   public BbdLedgerDto(BbdLedger ledger) {
-    this.id = ledger.getId();
+    this.ledgerId = ledger.getLedgerId();
     this.inOutSign = ledger.getInOutSign();
     this.feeTypeId = ledger.getFeeTypeId();
     this.amount = ledger.getAmount();
