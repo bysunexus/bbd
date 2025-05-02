@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<label for="chatbox"></label><textarea id="chatbox" style="width: 100%;height: 500px;" rows="20" cols="80">
+
+</textarea>
+<br/>
+<label for="message"></label><input type="text" id="message">
+<button id="send">发送</button>
+
+</body>
+<script type="text/javascript" src="assets/axios.min.js"></script>
+<script type="text/javascript">
+
+  function sendMessage() {
+    var msg = document.getElementById("message").value;
+    document.getElementById("chatbox").value += msg + "\n";
+
+    axios({
+      method: 'post',
+      url: '/demo/chat',
+      data: {
+        message: msg
+      },
+      responseType: 'stream',
+      adapter: 'fetch'
+    }).then(async (response) => {
+      const stream = response.data;
+      const reader = stream.pipeThrough(new TextDecoderStream()).getReader();
+      while (true) {
+        // 此处未按Server-Sent Events格式解析，仅按流处理
+        const {value, done} = await reader.read();
+        console.log(done);
+        console.log(value);
+        if (done) {
+          document.getElementById("chatbox").value += "\n";
+          break;
+        }
+        if (!(typeof value === "undefined" || value === null || value.trim() === "")) {
+          document.getElementById("chatbox").value += value;
+        }
+      }
+    });
+  }
+
+  (function () {
+    document.getElementById("send").onclick = function () {
+      sendMessage();
+    }
+
+  })();
+
+</script>
+</html>

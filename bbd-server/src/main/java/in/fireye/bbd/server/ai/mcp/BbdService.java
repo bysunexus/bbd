@@ -11,12 +11,14 @@ import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * 这里有个坑，因为是ai调用函数如果抛错本地并不会记录（也许是spring ai还有些不完善，后续应该会做处理，异常应该在本地打印）
  * 这里的处理做法是将每个方法均做try catch，如果抛错，则记录日志，并返回错误信息
+ * 请求参数尽量定义为直接参数，如果定义对象接受 有可能会导致ai调用函数失败
  */
 @Component
 @RequiredArgsConstructor
@@ -50,21 +52,30 @@ public class BbdService {
   }
 
   @Tool(description = "记录一笔费用支出，其中feeTypeId支出分类id为二级支出分类的id，需要先判断属于哪个一级支出分类，再判断二级支出分类")
-  public LedgerResultDto recordLedger(LedgerDto ledgerDto) {
-    log.info("记录一笔费用支出，ledgerDto={}", ledgerDto);
+  public LedgerResultDto recordLedger(
+    @ToolParam(description = "二级支出类型id")
+    Integer feeTypeId,
+    @ToolParam(description = "支出金额")
+    BigDecimal amount,
+    @ToolParam(description = "支出发生的日期，格式为：YYYYMMDD，默认为今天", required = false)
+    String feeDate,
+    @ToolParam(description = "支出的详细描述")
+    String desc
+  ) {
+    log.info("记录一笔费用支出，feeTypeId={},amount={},feeDate={},desc={}", feeTypeId, amount, feeDate, desc);
     try {
       BbdLedgerDto bbdLedgerDto = new BbdLedgerDto();
-      bbdLedgerDto.setFeeTypeId(ledgerDto.getFeeTypeId());
-      bbdLedgerDto.setAmount(ledgerDto.getAmount());
+      bbdLedgerDto.setFeeTypeId(feeTypeId);
+      bbdLedgerDto.setAmount(amount);
       LocalDateTime dateTime;
-      if (StringUtils.isNotBlank(ledgerDto.getFeeDate())) {
-        dateTime = DateUtils.parse(ledgerDto.getFeeDate(), DateUtils.YYYYMMDD);
+      if (StringUtils.isNotBlank(feeDate)) {
+        dateTime = DateUtils.parse(feeDate, DateUtils.YYYYMMDD);
       } else {
         dateTime = DateUtils.getToday();
       }
 
       bbdLedgerDto.setFeeDate(dateTime);
-      bbdLedgerDto.setDesc(ledgerDto.getDesc());
+      bbdLedgerDto.setDesc(desc);
 
       BbdLedgerDto result = ledgerService.createOutlayLedger(bbdLedgerDto);
 
@@ -77,7 +88,7 @@ public class BbdService {
       log.info("记录一笔费用支出成功，result={}", ledgerResultDto);
       return ledgerResultDto;
     } catch (Exception e) {
-      log.error("获取一级支出分类失败", e);
+      log.error("记录一笔费用支出失败", e);
       throw new RuntimeException("记录一笔费用支出失败", e);
     }
   }

@@ -6,6 +6,9 @@ spring:
   threads:
     virtual:
       enabled: true
+  mvc:
+    async:
+      request-timeout: 300s
   ai:
     openai:
       api-key: ${DOUBAO_API_KEY}
@@ -22,7 +25,8 @@ spring:
         type: ASYNC
 
   datasource:
-    url: jdbc:sqlite::resource:bbd.sqlite
+    #   这里将数据库url修改为绝对路径，原 jdbc:sqlite::resource:bbd.sqlite 由于有数据库操作会导致bbd.sqlite进而导致调试时spring boot会自动重启
+    url: jdbc:sqlite:E:/workspace/java/bbd/bbd.sqlite
     hikari:
       connection-init-sql: |
         PRAGMA journal_mode=WAL;
@@ -47,5 +51,5 @@ bbd:
 logging:
   level:
     root: info
-    org.springframework: debug
+    org.springframework: info
     in.fireye: debug
