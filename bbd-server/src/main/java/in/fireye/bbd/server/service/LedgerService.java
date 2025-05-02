@@ -9,17 +9,20 @@ import in.fireye.bbd.server.dto.BbdLedgerDto;
 import in.fireye.bbd.server.entity.BbdLedger;
 import in.fireye.bbd.server.repository.BbdLedgerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class LedgerService implements ILedgerService {
   private final BbdLedgerRepository ledgerRepository;
 
   private BbdLedgerDto createLedger(BbdLedgerDto ledgerDto, InOutSign inOutSign) {
+    log.info("记录一笔费用，ledgerDto={}", ledgerDto);
     BbdLedger ledger = new BbdLedger();
     ledger.setInOutSign(inOutSign.getCode());
     ledger.setFeeTypeId(ledgerDto.getFeeTypeId());
@@ -39,11 +42,13 @@ public class LedgerService implements ILedgerService {
 
   @Override
   public BbdLedgerDto createOutlayLedger(BbdLedgerDto ledgerDto) {
+    log.info("记录一笔费用支出，ledgerDto={}", ledgerDto);
     return createLedger(ledgerDto, InOutSign.OUT);
   }
 
   @Override
   public BbdLedgerDto createRevenueLedger(BbdLedgerDto ledgerDto) {
+    log.info("记录一笔费用收入，ledgerDto={}", ledgerDto);
     return createLedger(ledgerDto, InOutSign.IN);
   }
 

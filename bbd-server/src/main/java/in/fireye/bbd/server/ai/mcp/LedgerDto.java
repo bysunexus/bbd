@@ -11,7 +11,7 @@ public class LedgerDto {
   private Integer feeTypeId;
   @ToolParam(description = "支出金额")
   private BigDecimal amount;
-  @ToolParam(description = "支出发生的日期，格式为：YYYYMMDD")
+  @ToolParam(description = "支出发生的日期，格式为：YYYYMMDD，默认为今天", required = false)
   private String feeDate;
   @ToolParam(description = "支出的详细描述")
   private String desc;
