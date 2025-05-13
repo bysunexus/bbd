@@ -1,0 +1,11 @@
+html, body {
+  height: 100%;
+  width: 95%;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  border: 0;
+}
+
+.bbd-fullheight {
+  height: 100%;
+}

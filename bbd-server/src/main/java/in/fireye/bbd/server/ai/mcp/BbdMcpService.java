@@ -23,7 +23,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class BbdService {
+public class BbdMcpService {
 
   private final IFeeTypeService feeTypeService;
   private final ILedgerService ledgerService;
@@ -51,8 +51,8 @@ public class BbdService {
     }
   }
 
-  @Tool(description = "记录一笔费用支出，其中feeTypeId支出分类id为二级支出分类的id，需要先判断属于哪个一级支出分类，再判断二级支出分类")
-  public LedgerResultDto recordLedger(
+  @Tool(description = "记录一笔费用支出，其中feeTypeId支出分类id为二级支出分类的id，需要先判断属于哪个一级支出分类，再判断二级支出分类", returnDirect = true)
+  public DirectResultDto<LedgerResultDto> recordLedger(
     @ToolParam(description = "二级支出类型id")
     Integer feeTypeId,
     @ToolParam(description = "支出金额")
@@ -82,11 +82,13 @@ public class BbdService {
       LedgerResultDto ledgerResultDto = new LedgerResultDto();
       ledgerResultDto.setLedgerId(result.getLedgerId());
       ledgerResultDto.setFeeTypeId(result.getFeeTypeId());
+      ledgerResultDto.setFeeTypeName(feeTypeService.getFeeTypeTreeNameById(result.getFeeTypeId()));
       ledgerResultDto.setAmount(result.getAmount());
       ledgerResultDto.setFeeDate(DateUtils.format(result.getFeeDate(), DateUtils.YYYYMMDD));
       ledgerResultDto.setDesc(result.getDesc());
       log.info("记录一笔费用支出成功，result={}", ledgerResultDto);
-      return ledgerResultDto;
+
+      return new DirectResultDto<>(ledgerResultDto, DirectResultDataType.ledger);
     } catch (Exception e) {
       log.error("记录一笔费用支出失败", e);
       throw new RuntimeException("记录一笔费用支出失败", e);

@@ -1,6 +1,6 @@
 package in.fireye.bbd.server.ai;
 
-import in.fireye.bbd.server.ai.mcp.BbdService;
+import in.fireye.bbd.server.ai.mcp.BbdMcpService;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
@@ -14,9 +14,9 @@ public class AiChatConfig {
    * 可以采用这里提供 ToolCallbackProvider 的方式进行集成
    */
   @Bean
-  public ToolCallbackProvider bbdToolCallbacks(BbdService bbdService) {
+  public ToolCallbackProvider bbdToolCallbacks(BbdMcpService bbdMcpService) {
     return MethodToolCallbackProvider.builder()
-      .toolObjects(bbdService)
+      .toolObjects(bbdMcpService)
       .build();
   }
 

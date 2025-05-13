@@ -108,4 +108,10 @@ public class FeeTypeService implements IFeeTypeService {
     List<BbdFeeType> feeTypes = feeTypeRepository.getFeeTypeTreeById(feeTypeId);
     return feeTypes.stream().map(BbdFeeTypeDto::new).toList();
   }
+
+  @Override
+  public String getFeeTypeTreeNameById(Integer feeTypeId) {
+    List<BbdFeeType> feeTypes = feeTypeRepository.getFeeTypeTreeById(feeTypeId);
+    return feeTypes.stream().map(BbdFeeType::getTypeName).collect(Collectors.joining(" - "));
+  }
 }

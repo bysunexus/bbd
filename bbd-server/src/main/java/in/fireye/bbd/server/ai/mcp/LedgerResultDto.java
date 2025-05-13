@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 public class LedgerResultDto {
   private Integer ledgerId;
   private Integer feeTypeId;
+  private String feeTypeName;
   private BigDecimal amount;
   private String feeDate;
   private String desc;

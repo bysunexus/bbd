@@ -1,0 +1,1 @@
+import{_ as s,c as t,a,o as n}from"./index-DnlhFySI.js";const o={};function r(c,e){return n(),t("div",null,e[0]||(e[0]=[a("h1",null,"This is an about page",-1)]))}const l=s(o,[["render",r]]);export{l as default};

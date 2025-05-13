@@ -3,6 +3,7 @@ package in.fireye.bbd.server.controller;
 import in.fireye.bbd.server.vo.MessageVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 @RestController
-@RequestMapping("/demo")
+@RequestMapping("/bbd-server/demo")
 @RequiredArgsConstructor
 @Slf4j
 public class DemoController {
@@ -23,6 +24,15 @@ public class DemoController {
   @PostMapping(value = "/chat")
   public Flux<String> time(@RequestBody MessageVO message) {
 
-    return chatClient.prompt(message.getMessage()).stream().content();
+    return chatClient.prompt(message.getMessage())
+      .stream()
+      .chatResponse()
+      .map(r -> {
+        if (r.getResult() == null || r.getResult().getOutput() == null
+          || r.getResult().getOutput().getText() == null) {
+          return "";
+        }
+        return StringUtils.trimToEmpty(r.getResult().getOutput().getText());
+      }).filter(StringUtils::isNotBlank);
   }
 }
