@@ -36,6 +36,28 @@ public class DateUtils {
     return formatter.parse(dateString, LocalDate::from).atStartOfDay();
   }
 
+  /**
+   * 解析日期字符串
+   *
+   * @param dateString 日期字符串，***不能包含时间
+   * @param formatter  日期格式
+   * @return 日期时间对象
+   */
+  public static LocalDateTime parseAtStartOfDay(@NotNull String dateString, @NotNull DateTimeFormatter formatter) {
+    return formatter.parse(dateString, LocalDate::from).atStartOfDay();
+  }
+
+  /**
+   * 解析日期字符串
+   *
+   * @param dateString 日期字符串，***不能包含时间
+   * @param formatter  日期格式
+   * @return 日期时间对象
+   */
+  public static LocalDateTime parseAtEndOfDay(@NotNull String dateString, @NotNull DateTimeFormatter formatter) {
+    return formatter.parse(dateString, LocalDate::from).plusDays(1).atStartOfDay();
+  }
+
   public static String format(@NotNull LocalDateTime dateTime, @NotNull DateTimeFormatter formatter) {
     return formatter.format(dateTime);
   }

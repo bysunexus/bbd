@@ -42,7 +42,7 @@ const handleSendMessage = (content: string) => {
   // 发送消息给服务器
   axios({
     method: 'post',
-    url: '/bbd-server/demo/chat',
+    url: '/bbd-server/ai/chat',
     data: {
       message: content
     },
@@ -83,6 +83,8 @@ const handleSendMessage = (content: string) => {
         aiMessage.data = json.data;
       }
     }
+  }).catch(function (error) {
+    aiMessage.data.content = "请求服务器出错,请稍后再试!";
   });
 };
 

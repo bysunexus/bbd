@@ -20,6 +20,7 @@ public class BbdLedgerDto implements Serializable {
   private Integer ledgerId;
   private String inOutSign;
   private Integer feeTypeId;
+  private String feeTypeName;
   private BigDecimal amount;
   private LocalDateTime feeDate;
   private String desc;

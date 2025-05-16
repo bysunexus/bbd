@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import {ref} from 'vue'
+import {ElMessage, ElMessageBox} from 'element-plus'
+import axios from "axios";
+
 interface Props {
   data: any;
   dataType: 'text' | 'ledger' | 'stat' | 'tip';
@@ -14,6 +18,37 @@ const emit = defineEmits<{
 const handleTipClick = (tip: string) => {
   emit('tipClick', tip);
 };
+
+const title = ref("费用已记录")
+const disableDelete = ref(false)
+const showDeleteBtn = ref(true)
+
+const handleDeleteLedger = (data: any) => {
+  disableDelete.value = true;
+  ElMessageBox
+    .confirm('确认要删除费用"' + data.desc + '"么?')
+    .then(() => {
+      axios({
+        method: 'delete',
+        url: '/bbd-server/ledgers/' + data.ledgerId
+      }).then((response) => {
+        console.log(response);
+
+        ElMessage({
+          message: '费用记录已删除',
+          type: 'success',
+        });
+        title.value = "费用已删除"
+        showDeleteBtn.value = false;
+      }).catch(function (error) {
+        ElMessage({
+          message: '请求服务器出错,请稍后再试!',
+          type: 'error',
+        });
+        disableDelete.value = false;
+      });
+    });
+};
 </script>
 
 <template>
@@ -27,12 +62,14 @@ const handleTipClick = (tip: string) => {
     <div v-else-if="dataType === 'ledger'">
       <el-descriptions
         class="margin-top"
-        title="已记录花费"
+        :title="title"
         :column="3"
         border
       >
         <template #extra>
-          <el-button type="primary">搞错了，我要删除</el-button>
+          <el-button @click="handleDeleteLedger(data)" v-if="showDeleteBtn" :disabled="disableDelete" type="primary">
+            搞错了，我要删除
+          </el-button>
         </template>
         <el-descriptions-item>
           <template #label>

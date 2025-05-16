@@ -1,5 +1,6 @@
 package in.fireye.bbd.server.controller;
 
+
 import in.fireye.bbd.server.vo.MessageVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 @RestController
-@RequestMapping("/bbd-server/demo")
+@RequestMapping("/bbd-server/ai")
 @RequiredArgsConstructor
 @Slf4j
-public class DemoController {
+public class AiController {
 
 
   private final ChatClient chatClient;
@@ -35,4 +36,5 @@ public class DemoController {
         return StringUtils.trimToEmpty(r.getResult().getOutput().getText());
       }).filter(StringUtils::isNotBlank);
   }
+
 }

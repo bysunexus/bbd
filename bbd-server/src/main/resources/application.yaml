@@ -11,7 +11,7 @@ spring:
       request-timeout: 300s
   ai:
     openai:
-      api-key: ${DOUBAO_API_KEY}
+      api-key: ${OPENAI_API_KEY}
       chat:
         base-url: https://ark.cn-beijing.volces.com/api
         completions-path: /v3/chat/completions
@@ -32,7 +32,7 @@ spring:
         PRAGMA journal_mode=WAL;
         PRAGMA synchronous=NORMAL;
         PRAGMA mmap_size=134217728;
-        PRAGMA journal_size_limit=134217728; 
+        PRAGMA journal_size_limit=134217728;
         PRAGMA cache_size=2000;
         PRAGMA temp_store=MEMORY;
     driver-class-name: org.sqlite.JDBC

@@ -1,4 +1,4 @@
-package in.fireye.bbd.server.ai.mcp;
+package in.fireye.bbd.server.ai.dto;
 
 import in.fireye.bbd.server.dto.BbdFeeTypeDto;
 import lombok.AllArgsConstructor;
