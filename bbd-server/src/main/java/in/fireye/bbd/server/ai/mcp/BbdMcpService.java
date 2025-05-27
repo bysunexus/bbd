@@ -16,7 +16,7 @@ import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -71,14 +71,14 @@ public class BbdMcpService {
       BbdLedgerDto bbdLedgerDto = new BbdLedgerDto();
       bbdLedgerDto.setFeeTypeId(feeTypeId);
       bbdLedgerDto.setAmount(amount);
-      LocalDateTime dateTime;
+      LocalDate date;
       if (StringUtils.isNotBlank(feeDate)) {
-        dateTime = DateUtils.parse(feeDate, DateUtils.YYYYMMDD);
+        date = DateUtils.parse(feeDate, DateUtils.YYYYMMDD);
       } else {
-        dateTime = DateUtils.getToday();
+        date = DateUtils.getToday();
       }
 
-      bbdLedgerDto.setFeeDate(dateTime);
+      bbdLedgerDto.setFeeDate(date);
       bbdLedgerDto.setDesc(desc);
 
       BbdLedgerDto result = ledgerService.createOutlayLedger(bbdLedgerDto);

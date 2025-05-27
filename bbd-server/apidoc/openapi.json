@@ -1,0 +1,597 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "逼逼叨",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "tags": [
+    {
+      "name": "AiController",
+      "description": ""
+    },
+    {
+      "name": "LedgerController",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/bbd-server/ai/chat": {
+      "post": {
+        "summary": "ai助手对话接口",
+        "deprecated": false,
+        "tags": [
+          "AiController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/c0b6ad4531343946b06109d00a74e01c"
+              },
+              "examples": {
+                "json": {
+                  "summary": "test data",
+                  "value": "{\n  \"message\": \"\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "[\n  \"\",\n  \"\"\n]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "bbd-server-ai-chat-POST",
+        "parameters": []
+      }
+    },
+    "/bbd-server/ledgers/{ledgerId}": {
+      "get": {
+        "summary": "查询记账",
+        "deprecated": false,
+        "tags": [
+          "LedgerController"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/8b64aecae2da63477255c930914fe550"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"message\": \"\",\n  \"data\": {\n    \"ledgerId\": 0,\n    \"inOutSign\": \"\",\n    \"feeTypeId\": 0,\n    \"feeTypeName\": \"\",\n    \"amount\": 0,\n    \"feeDate\": \"yyyy-MM-dd\",\n    \"desc\": \"\"\n  },\n  \"code\": \"\",\n  \"state\": true,\n  \"detailMessage\": \"\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "bbd-server-ledgers-{ledgerId}-GET",
+        "parameters": [
+          {
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "in": "path",
+            "description": "记账id",
+            "required": true,
+            "example": "0",
+            "name": "ledgerId"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "删除记账",
+        "deprecated": false,
+        "tags": [
+          "LedgerController"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/cc380133ecc15f8dfa39d4ab95bd59ba"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"message\": \"\",\n  \"code\": \"\",\n  \"state\": true,\n  \"detailMessage\": \"\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "bbd-server-ledgers-{ledgerId}-DELETE",
+        "parameters": [
+          {
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "in": "path",
+            "description": "记账id",
+            "required": true,
+            "example": "0",
+            "name": "ledgerId"
+          }
+        ]
+      }
+    },
+    "/bbd-server/ledgers/": {
+      "post": {
+        "summary": "创建记账",
+        "deprecated": false,
+        "tags": [
+          "LedgerController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/c5d19172d1f947e96823b724ec59eea4"
+              },
+              "examples": {
+                "json": {
+                  "summary": "test data",
+                  "value": "{\n  \"ledgerId\": 0,\n  \"inOutSign\": \"\",\n  \"feeTypeId\": 0,\n  \"feeTypeName\": \"\",\n  \"amount\": 0,\n  \"feeDate\": \"yyyy-MM-dd\",\n  \"desc\": \"\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/8b64aecae2da63477255c930914fe550"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"message\": \"\",\n  \"data\": {\n    \"ledgerId\": 0,\n    \"inOutSign\": \"\",\n    \"feeTypeId\": 0,\n    \"feeTypeName\": \"\",\n    \"amount\": 0,\n    \"feeDate\": \"yyyy-MM-dd\",\n    \"desc\": \"\"\n  },\n  \"code\": \"\",\n  \"state\": true,\n  \"detailMessage\": \"\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "bbd-server-ledgers-POST",
+        "parameters": []
+      },
+      "get": {
+        "summary": "查询记账分页列表",
+        "deprecated": false,
+        "tags": [
+          "LedgerController"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/84b9b5ee91b91496946f426096aa941b"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"message\": \"\",\n  \"data\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"total\": 0,\n    \"totalPages\": 0,\n    \"content\": [\n      {\n        \"ledgerId\": 0,\n        \"inOutSign\": \"\",\n        \"feeTypeId\": 0,\n        \"feeTypeName\": \"\",\n        \"amount\": 0,\n        \"feeDate\": \"yyyy-MM-dd\",\n        \"desc\": \"\"\n      }\n    ]\n  },\n  \"code\": \"\",\n  \"state\": true,\n  \"detailMessage\": \"\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "bbd-server-ledgers-GET",
+        "parameters": [
+          {
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "in": "query",
+            "description": "页码，从0开始",
+            "required": false,
+            "example": "0",
+            "name": "pageNumber"
+          },
+          {
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "in": "query",
+            "description": "每页数量",
+            "required": false,
+            "example": "0",
+            "name": "pageSize"
+          },
+          {
+            "schema": {
+              "format": "string",
+              "type": "string"
+            },
+            "in": "query",
+            "description": "收支标志 I-收入 O-支出",
+            "required": false,
+            "name": "inOutSign"
+          },
+          {
+            "schema": {
+              "format": "string",
+              "type": "string"
+            },
+            "in": "query",
+            "description": "开始时间 格式:yyyyMMdd",
+            "required": false,
+            "name": "startDate"
+          },
+          {
+            "schema": {
+              "format": "string",
+              "type": "string"
+            },
+            "in": "query",
+            "description": "结束时间 默认为今天 格式:yyyyMMdd",
+            "required": false,
+            "name": "endDate"
+          },
+          {
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "in": "query",
+            "description": "费用类型ID",
+            "required": false,
+            "example": "0",
+            "name": "feeTypeId"
+          }
+        ]
+      },
+      "put": {
+        "summary": "更新记账",
+        "deprecated": false,
+        "tags": [
+          "LedgerController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/c5d19172d1f947e96823b724ec59eea4"
+              },
+              "examples": {
+                "json": {
+                  "summary": "test data",
+                  "value": "{\n  \"ledgerId\": 0,\n  \"inOutSign\": \"\",\n  \"feeTypeId\": 0,\n  \"feeTypeName\": \"\",\n  \"amount\": 0,\n  \"feeDate\": \"yyyy-MM-dd\",\n  \"desc\": \"\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/cc380133ecc15f8dfa39d4ab95bd59ba"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"message\": \"\",\n  \"code\": \"\",\n  \"state\": true,\n  \"detailMessage\": \"\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "bbd-server-ledgers-PUT",
+        "parameters": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "c5d19172d1f947e96823b724ec59eea4": {
+        "properties": {
+          "ledgerId": {
+            "format": "int32",
+            "description": "记账id",
+            "type": "integer",
+            "example": "0"
+          },
+          "inOutSign": {
+            "format": "string",
+            "description": "收支标志 I-收入 O-支出",
+            "type": "string"
+          },
+          "feeTypeId": {
+            "format": "int32",
+            "description": "收支类别id",
+            "type": "integer",
+            "example": "0"
+          },
+          "feeTypeName": {
+            "format": "string",
+            "description": "收支类别名称",
+            "type": "string"
+          },
+          "amount": {
+            "format": "number",
+            "description": "金额",
+            "type": "number",
+            "example": "0"
+          },
+          "feeDate": {
+            "format": "string",
+            "description": "账单日期 格式:yyyyMMdd",
+            "type": "string",
+            "example": "yyyy-MM-dd"
+          },
+          "desc": {
+            "format": "string",
+            "description": "描述",
+            "type": "string"
+          }
+        }
+      },
+      "defaultPrimitive": {
+        "format": "string",
+        "type": "string"
+      },
+      "1f9f4e48db0fd21c0a0d755bff0d88a9": {
+        "properties": {
+          "ledgerId": {
+            "format": "int32",
+            "description": "记账id",
+            "type": "integer",
+            "example": "0"
+          },
+          "inOutSign": {
+            "format": "string",
+            "description": "收支标志 I-收入 O-支出",
+            "type": "string"
+          },
+          "feeTypeId": {
+            "format": "int32",
+            "description": "收支类别id",
+            "type": "integer",
+            "example": "0"
+          },
+          "feeTypeName": {
+            "format": "string",
+            "description": "收支类别名称",
+            "type": "string"
+          },
+          "amount": {
+            "format": "number",
+            "description": "金额",
+            "type": "number",
+            "example": "0"
+          },
+          "feeDate": {
+            "format": "string",
+            "description": "账单日期 格式:yyyyMMdd",
+            "type": "string",
+            "example": "yyyy-MM-dd"
+          },
+          "desc": {
+            "format": "string",
+            "description": "描述",
+            "type": "string"
+          }
+        }
+      },
+      "98985e50e0e4ade4a4dfb85d70474828": {
+        "properties": {
+          "pageNumber": {
+            "format": "int32",
+            "description": "当前页码",
+            "type": "integer",
+            "example": "0"
+          },
+          "pageSize": {
+            "format": "int32",
+            "description": "每页数量",
+            "type": "integer",
+            "example": "0"
+          },
+          "total": {
+            "format": "int64",
+            "description": "总页数",
+            "type": "number",
+            "example": "0"
+          },
+          "totalPages": {
+            "format": "int32",
+            "description": "总记录数",
+            "type": "integer",
+            "example": "0"
+          },
+          "content": {
+            "description": "数据列表",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/b981e8bd35699e2c66bf517dd1946774"
+            }
+          }
+        }
+      },
+      "b981e8bd35699e2c66bf517dd1946774": {
+        "properties": {
+          "ledgerId": {
+            "format": "int32",
+            "description": "记账id",
+            "type": "integer",
+            "example": "0"
+          },
+          "inOutSign": {
+            "format": "string",
+            "description": "收支标志 I-收入 O-支出",
+            "type": "string"
+          },
+          "feeTypeId": {
+            "format": "int32",
+            "description": "收支类别id",
+            "type": "integer",
+            "example": "0"
+          },
+          "feeTypeName": {
+            "format": "string",
+            "description": "收支类别名称",
+            "type": "string"
+          },
+          "amount": {
+            "format": "number",
+            "description": "金额",
+            "type": "number",
+            "example": "0"
+          },
+          "feeDate": {
+            "format": "string",
+            "description": "账单日期 格式:yyyyMMdd",
+            "type": "string",
+            "example": "yyyy-MM-dd"
+          },
+          "desc": {
+            "format": "string",
+            "description": "描述",
+            "type": "string"
+          }
+        }
+      },
+      "84b9b5ee91b91496946f426096aa941b": {
+        "properties": {
+          "message": {
+            "format": "string",
+            "description": "提示信息",
+            "type": "string"
+          },
+          "data": {
+            "description": "返回数据(object)",
+            "$ref": "#/components/schemas/98985e50e0e4ade4a4dfb85d70474828"
+          },
+          "code": {
+            "format": "string",
+            "description": "状态码",
+            "type": "string"
+          },
+          "state": {
+            "format": "boolean",
+            "description": "状态",
+            "type": "boolean",
+            "example": "true"
+          },
+          "detailMessage": {
+            "format": "string",
+            "description": "错误明细",
+            "type": "string"
+          }
+        }
+      },
+      "c0b6ad4531343946b06109d00a74e01c": {
+        "properties": {
+          "message": {
+            "format": "string",
+            "description": "用户对话消息",
+            "type": "string"
+          }
+        }
+      },
+      "d751713988987e9331980363e24189ce": {},
+      "8b64aecae2da63477255c930914fe550": {
+        "properties": {
+          "message": {
+            "format": "string",
+            "description": "提示信息",
+            "type": "string"
+          },
+          "data": {
+            "description": "返回数据(object)",
+            "$ref": "#/components/schemas/1f9f4e48db0fd21c0a0d755bff0d88a9"
+          },
+          "code": {
+            "format": "string",
+            "description": "状态码",
+            "type": "string"
+          },
+          "state": {
+            "format": "boolean",
+            "description": "状态",
+            "type": "boolean",
+            "example": "true"
+          },
+          "detailMessage": {
+            "format": "string",
+            "description": "错误明细",
+            "type": "string"
+          }
+        }
+      },
+      "cc380133ecc15f8dfa39d4ab95bd59ba": {
+        "properties": {
+          "message": {
+            "format": "string",
+            "description": "提示信息",
+            "type": "string"
+          },
+          "data": {
+            "description": "返回数据(object)",
+            "type": "object"
+          },
+          "code": {
+            "format": "string",
+            "description": "状态码",
+            "type": "string"
+          },
+          "state": {
+            "format": "boolean",
+            "description": "状态",
+            "type": "boolean",
+            "example": "true"
+          },
+          "detailMessage": {
+            "format": "string",
+            "description": "错误明细",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

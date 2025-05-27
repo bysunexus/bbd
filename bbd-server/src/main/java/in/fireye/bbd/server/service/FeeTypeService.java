@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -60,7 +59,6 @@ public class FeeTypeService implements IFeeTypeService {
     Optional<BbdFeeType> feeType = feeTypeRepository.findById(feeTypeDto.getFeeTypeId());
     BbdFeeType type = feeType.orElseThrow(() -> new BbdBusinessException(ResponseCode.PARAM_ERROR));
     type.setTypeName(feeTypeDto.getTypeName());
-    type.setModifyTime(LocalDateTime.now());
     // todo:sby 待登录完成后此处修改为获取当前登录用户id
     type.setModifyUser(0);
     feeTypeRepository.save(type);
@@ -71,7 +69,7 @@ public class FeeTypeService implements IFeeTypeService {
   @Transactional(rollbackFor = Exception.class)
   public void deleteFeeType(Integer feeTypeId) {
     // todo:sby 待登录完成后此处修改为获取当前登录用户id
-    feeTypeRepository.deleteFeeType(feeTypeId, LocalDateTime.now(), 0);
+    feeTypeRepository.deleteFeeType(feeTypeId, 0);
     feeTypeTreeRepository.deleteByDescendantId(feeTypeId);
   }
 

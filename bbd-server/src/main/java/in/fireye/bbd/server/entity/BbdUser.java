@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -38,11 +39,11 @@ public class BbdUser {
 
   @CreationTimestamp
   @Column(name = "create_time", columnDefinition = "TIMESTAMP", nullable = false)
-  private LocalDateTime createTime;
+  private Instant createTime;
 
-  @CreationTimestamp
+  @UpdateTimestamp
   @Column(name = "modify_time", columnDefinition = "TIMESTAMP", nullable = false)
-  private LocalDateTime modifyTime;
+  private Instant modifyTime;
 
   @ColumnDefault("'1'")
   @Column(name = "enabled", nullable = false, length = 1)

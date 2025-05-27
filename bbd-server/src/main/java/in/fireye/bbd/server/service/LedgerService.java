@@ -21,7 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,8 +44,6 @@ public class LedgerService implements ILedgerService {
     // todo:sby 待登录完成后此处修改为获取当前登录用户id
     ledger.setCreateUser(0);
     ledger.setModifyUser(0);
-    ledger.setCreateTime(LocalDateTime.now());
-    ledger.setModifyTime(LocalDateTime.now());
     ledger.setDeleted(Deleted.NO.getCode());
     ledger.setDesc(ledgerDto.getDesc());
     ledgerRepository.saveAndFlush(ledger);
@@ -79,7 +77,6 @@ public class LedgerService implements ILedgerService {
     ledger.setDesc(ledgerDto.getDesc());
     // todo:sby 待登录完成后此处修改为获取当前登录用户id
     ledger.setModifyUser(0);
-    ledger.setModifyTime(LocalDateTime.now());
     ledgerRepository.save(ledger);
   }
 
@@ -91,7 +88,6 @@ public class LedgerService implements ILedgerService {
     ledger.setDeleted(Deleted.YES.getCode());
     // todo:sby 待登录完成后此处修改为获取当前登录用户id
     ledger.setModifyUser(0);
-    ledger.setModifyTime(LocalDateTime.now());
     ledgerRepository.save(ledger);
   }
 
@@ -118,11 +114,11 @@ public class LedgerService implements ILedgerService {
       List<Predicate> predicateList = new ArrayList<>();
 
       if (StringUtils.isNotBlank(req.getStartDate())) {
-        LocalDateTime date = DateUtils.parseAtStartOfDay(req.getStartDate(), DateUtils.YYYYMMDD);
+        LocalDate date = DateUtils.parse(req.getStartDate(), DateUtils.YYYYMMDD);
         predicateList.add(cb.greaterThanOrEqualTo(root.get("feeDate"), date));
       }
       if (StringUtils.isNotBlank(req.getEndDate())) {
-        LocalDateTime date = DateUtils.parseAtEndOfDay(req.getEndDate(), DateUtils.YYYYMMDD);
+        LocalDate date = DateUtils.parse(req.getEndDate(), DateUtils.YYYYMMDD);
         predicateList.add(cb.lessThan(root.get("feeDate"), date));
       }
       if (StringUtils.isNotBlank(req.getInOutSign())) {

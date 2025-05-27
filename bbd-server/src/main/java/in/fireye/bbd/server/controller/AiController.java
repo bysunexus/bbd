@@ -22,6 +22,13 @@ public class AiController {
   private final ChatClient chatClient;
 
   // 如使用Server-Sent Events 需要将 produces = MediaType.TEXT_EVENT_STREAM_VALUE，此处仅以流方式返回
+
+  /**
+   * ai助手对话接口
+   *
+   * @param message 用户对话消息
+   * @return ai响应消息
+   */
   @PostMapping(value = "/chat")
   public Flux<String> time(@RequestBody MessageVO message) {
 

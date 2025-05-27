@@ -19,6 +19,7 @@
     <java.version>21</java.version>
     <spring-ai.version>1.0.0-M7</spring-ai.version>
     <spring-boot.version>3.4.4</spring-boot.version>
+    <smart-doc.version>3.1.0</smart-doc.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -85,6 +86,29 @@
         </executions>
       </plugin>
     </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.ly.smart-doc</groupId>
+          <artifactId>smart-doc-maven-plugin</artifactId>
+          <version>${smart-doc.version}</version>
+          <configuration>
+            <!--指定生成文档的使用的配置文件-->
+            <configFile>${basedir}/src/main/resources/smart-doc.json</configFile>
+            <!--指定项目名称-->
+            <projectName>逼逼叨</projectName>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>html</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 
   <modules>

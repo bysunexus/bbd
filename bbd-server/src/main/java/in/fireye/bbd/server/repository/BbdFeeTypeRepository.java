@@ -5,17 +5,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BbdFeeTypeRepository extends JpaRepository<BbdFeeType, Integer> {
 
   @Modifying
   @Query("""
-      update BbdFeeType t set t.deleted = '1' ,t.modifyTime = :modifyTime, t.modifyUser = :modifyUser
+      update BbdFeeType t set t.deleted = '1' , t.modifyUser = :modifyUser
       where t.feeTypeId in (select tt.descendantId from BbdFeeTypeTree tt where tt.ancestorId = :feeTypeId) and t.deleted = '0'
     """)
-  void deleteFeeType(Integer feeTypeId, LocalDateTime modifyTime, Integer modifyUser);
+  void deleteFeeType(Integer feeTypeId, Integer modifyUser);
 
   @Query("select t from BbdFeeType t where t.parentId = :parentId and t.deleted = '0'")
   List<BbdFeeType> getFeeTypeByParentId(Integer parentId);

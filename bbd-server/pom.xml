@@ -114,6 +114,24 @@
           </excludes>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>com.ly.smart-doc</groupId>
+        <artifactId>smart-doc-maven-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>in.fireye:.*</include>
+          </includes>
+          <configFile>./src/main/resources/smart-doc.json</configFile>
+          <projectName>逼逼叨</projectName>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>html</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 

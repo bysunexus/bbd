@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -28,9 +30,8 @@ public class BbdLedger {
   @Column(name = "amount", nullable = false)
   private BigDecimal amount;
 
-  @CreationTimestamp
   @Column(name = "fee_date", columnDefinition = "TIMESTAMP", nullable = false)
-  private LocalDateTime feeDate;
+  private LocalDate feeDate;
 
   @Column(name = "create_user", nullable = false)
   private Integer createUser;
@@ -40,11 +41,11 @@ public class BbdLedger {
 
   @CreationTimestamp
   @Column(name = "create_time", columnDefinition = "TIMESTAMP", nullable = false)
-  private LocalDateTime createTime;
+  private Instant createTime;
 
-  @CreationTimestamp
+  @UpdateTimestamp
   @Column(name = "modify_time", columnDefinition = "TIMESTAMP", nullable = false)
-  private LocalDateTime modifyTime;
+  private Instant modifyTime;
 
   @ColumnDefault("'0'")
   @Column(name = "deleted", nullable = false, length = 1)

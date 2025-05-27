@@ -12,7 +12,13 @@ public class CommonPageRequest implements Serializable {
   @Serial
   private static final long serialVersionUID = 8772952530230005684L;
 
+  /**
+   * 页码，从0开始
+   */
   private int pageNumber;
+  /**
+   * 每页数量
+   */
   private int pageSize;
 
 
