@@ -5,11 +5,11 @@
   <parent>
     <groupId>in.fireye</groupId>
     <artifactId>bbd</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>bbd-demo-mcp-server</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${revision}</version>
   <name>bbd-demo-mcp-server</name>
   <description>bbd-demo-mcp-server</description>
   <properties>
