@@ -37,7 +37,7 @@ public class AiChatConfig {
           记账的支出发生的日期你可以使用系统提供的工具获取。
           回复时，请使用简洁友好的语言，对于非记账相关的提问你可以拒绝回答。
         """)
-      .defaultTools(bbdToolCallbacks)
+      .defaultToolCallbacks(bbdToolCallbacks)
       .build();
   }
 }
